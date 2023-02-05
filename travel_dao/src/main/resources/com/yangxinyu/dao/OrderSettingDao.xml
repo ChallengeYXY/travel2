@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yangxinyu.dao.OrderSettingDao">
+    <!--向预约管理表中添加数据、（添加日期与数量）-->
+    <insert id="addOrderSetting" parameterType="com.yangxinyu.entity.OrderSetting">
+        INSERT INTO t_ordersetting(orderDate,number)VALUES(#{orderDate},#{number})
+    </insert>
+
+    <!--根据日期查询预约管理表-->
+    <select id="getOrderSettingByOrderDate" resultType="int" parameterType="date">
+        SELECT COUNT(*) FROM t_ordersetting WHERE orderDate=#{value}
+    </select>
+
+    <!--根据日期修改预约管理表-->
+    <update id="updateOrderSettingByOrderDate" parameterType="com.yangxinyu.entity.OrderSetting">
+        UPDATE t_ordersetting SET number=#{number) WHERE orderDate=#{orderDate};
+    </update>
+
+</mapper>
