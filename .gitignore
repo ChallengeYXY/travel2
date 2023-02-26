@@ -1,0 +1,8 @@
+# Project exclude paths
+/travel_common/target/
+/travel_dao/target/
+/travel_interface/target/
+/travel_job/target/
+/travel_pojo/target/
+/travel_service/target/
+/travel_web/target/

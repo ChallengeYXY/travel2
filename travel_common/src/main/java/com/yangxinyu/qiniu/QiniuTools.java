@@ -15,7 +15,7 @@ public class QiniuTools {
     //封装上传参数
     private String accessKey = "gTV5LdykLXyG6nEvXnpSpIZee7ZxCY5nhqqxBqgZ";
     private String secretKey = "R0qN2LiHsGRKbIA-wThJZhRZbkKw78WEsP-_5ZZR";
-    private String bucket = "mytravelspace";
+    private String bucket = "mytravelspace2";
 
 
     //文件上传

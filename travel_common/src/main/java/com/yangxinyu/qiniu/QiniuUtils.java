@@ -18,7 +18,7 @@ public class QiniuUtils {
 
     public  static String accessKey = "gTV5LdykLXyG6nEvXnpSpIZee7ZxCY5nhqqxBqgZ";
     public  static String secretKey = "R0qN2LiHsGRKbIA-wThJZhRZbkKw78WEsP-_5ZZR";
-    public  static String bucket = "mytravelspace";
+    public  static String bucket = "mytravelspace2";
 
     public static void upload2Qiniu(String filePath,String fileName){
         //构造一个带指定Zone对象的配置类

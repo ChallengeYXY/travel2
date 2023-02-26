@@ -1,5 +1,7 @@
 package com.yangxinyu.service;
 
+import com.yangxinyu.entity.OrderSetting;
+
 import java.util.List;
 
 public interface OrderSettingService {
@@ -9,4 +11,12 @@ public interface OrderSettingService {
      * @param excelRows
      */
     public void upload(List<String[]> excelRows);
+
+    /**
+     * 通过年月查询预约表
+     * @param month
+     * @return
+     */
+
+    List<OrderSetting> getOrderSettingByMonth(Integer year, Integer month);
 }

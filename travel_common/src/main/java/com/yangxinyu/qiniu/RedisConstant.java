@@ -7,5 +7,5 @@ public class RedisConstant {
     public static final String SETMEAL_PIC_DB_RESOURCES = "setmealPicDbResources";
 
     //七牛云空间域名
-    public static final String PICTURE_SPACE_DOMAINNAME = "http://rjhdcn9xb.hn-bkt.clouddn.com";
+    public static final String PICTURE_SPACE_DOMAINNAME = "http://rq9gw1i4c.hn-bkt.clouddn.com/";
 }

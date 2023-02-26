@@ -136,6 +136,7 @@
             },
             created: function () {//在vue初始化时调用
                 this.initData(null);
+
             },
             methods: {
 				//预约设置
@@ -234,7 +235,11 @@
                             dayobject.index = index++;
                         this.days.push(dayobject);
                     }
-                    
+
+                    //日历中数据赋值
+                    axios.get("orderSetting/getOrderSettingByMonth?year="+this.currentYear+"&month="+this.currentMonth).then((resp)=>{
+                        this.leftobj = resp.data.data;
+                    });
                     /*this.leftobj = [
                         { date: 1, number: 120, reservations: 1 },
                         { date: 3, number: 120, reservations: 1 },

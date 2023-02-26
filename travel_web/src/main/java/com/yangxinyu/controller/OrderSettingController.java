@@ -2,10 +2,12 @@ package com.yangxinyu.controller;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.yangxinyu.constant.MessageConstant;
+import com.yangxinyu.entity.OrderSetting;
 import com.yangxinyu.entity.Result;
 import com.yangxinyu.poi.POIUtils;
 import com.yangxinyu.service.OrderSettingService;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -36,5 +38,11 @@ public class OrderSettingController {
         } catch (IOException e) {
             return new Result(false,MessageConstant.UPLOAD_FAIL);
         }
+    }
+
+    @RequestMapping("/getOrderSettingByMonth")
+    private Result getOrderSettingByMonth(Integer year,Integer month){
+        List<OrderSetting> orderSettings = orderSettingService.getOrderSettingByMonth(year,month);
+        return new Result(true,MessageConstant.GET_ORDERSETTING_SUCCESS,orderSettings);
     }
 }
