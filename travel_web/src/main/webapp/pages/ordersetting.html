@@ -141,6 +141,43 @@
             methods: {
 				//预约设置
                 handleOrderSet(day){
+                    //获取年月日
+                    var date = day.getFullYear() + "-" + (day.getMonth()+1) + "-" + day.getDate();
+                    //alert(date);
+                    this.$prompt('请输入预约人数', '提示', {
+                        confirmButtonText: '确定',
+                        cancelButtonText: '取消',
+                        inputPattern: /^\d+$/, //非负整数
+                        inputErrorMessage: '输入人数有误！'
+                    }).then(({ value }) => {  //取到框值
+                        //发送axios
+                        axios.post("orderSetting/setNumber","date="+date+"&num="+value).then((resp)=>{
+                            if (resp.data.flag==true){
+                                this.$message({
+                                    type: 'success',
+                                    message: "预约人数设置成功！"
+                                });
+                                this.initData(this.formatDate(day.getFullYear(), day.getMonth() + 1, 1));
+                            }else {
+                                this.$message({
+                                    type: 'error',
+                                    message: "系统错误！"
+                                });
+                            }
+
+                        }).catch((err)=>{
+                            this.$message({
+                                type: 'error',
+                                message: "预约人数设置失败！"
+                            });
+                        });
+
+                    }).catch(() => {
+                        this.$message({
+                            type: 'info',
+                            message: '取消输入'
+                        });
+                    });
                 },
 				//上传之前进行文件格式校验
                 beforeUpload(file){
@@ -181,6 +218,7 @@
                     }else{
                         this.$message.error(response.message);
                     }
+                    this.goCurrentMonth();
                     console.log(response, file);
                 },
                 //初始化当前页要展示的日期

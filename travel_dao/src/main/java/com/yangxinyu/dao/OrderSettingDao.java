@@ -35,4 +35,11 @@ public interface OrderSettingDao {
      * @return
      */
     List<OrderSetting> getOrderSettingByMonth(String start, String end);
+
+    /**
+     * 通过日期修改可预约人数
+     * @param date
+     * @param num
+     */
+    void setNumberByDate(String date, Integer num);
 }

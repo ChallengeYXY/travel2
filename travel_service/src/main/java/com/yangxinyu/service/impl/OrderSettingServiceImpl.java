@@ -6,6 +6,7 @@ import com.yangxinyu.entity.OrderSetting;
 import com.yangxinyu.service.OrderSettingService;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
@@ -22,21 +23,21 @@ public class OrderSettingServiceImpl implements OrderSettingService {
      * @param excelRows
      */
     @Override
-    public void upload(List<String[]> excelRows) {
+    public void upload(List<String[]> excelRows) throws ParseException {
         //创建一个OrderSetting对象
         OrderSetting orderSetting = new OrderSetting();
         //将每行封装为OrderSetting对象
         for (String[] excelRow : excelRows) {
-            orderSetting.setOrderDate(new Date(excelRow[0]));
+            orderSetting.setOrderDate(new SimpleDateFormat("yyyy/MM/dd").parse(excelRow[0]));
             orderSetting.setNumber(Integer.parseInt(excelRow[1]));
             //判断当前日期是否存在
-            int count = orderSettingDao.getOrderSettingByOrderDate(new SimpleDateFormat("yyyy-MM-dd").format(orderSetting.getDate()));
+            int count = orderSettingDao.getOrderSettingByOrderDate(new SimpleDateFormat("yyyy-MM-dd").format(orderSetting.getOrderDate()));
             System.out.println(count);
             if (count>0){
                 //当前日期存在，根据日期修改当前数量
-                orderSettingDao.updateOrderSettingByOrderDate(orderSetting.getNumber(),new SimpleDateFormat("yyyy-MM-dd").format(orderSetting.getDate()));
+                orderSettingDao.updateOrderSettingByOrderDate(orderSetting.getNumber(),new SimpleDateFormat("yyyy-MM-dd").format(orderSetting.getOrderDate()));
             }else {
-                orderSettingDao.addOrderSetting(orderSetting.getNumber(),new SimpleDateFormat("yyyy-MM-dd").format(orderSetting.getDate()),orderSetting.getReservations());
+                orderSettingDao.addOrderSetting(orderSetting.getNumber(),new SimpleDateFormat("yyyy-MM-dd").format(orderSetting.getOrderDate()),orderSetting.getReservations());
             }
         }
     }
@@ -85,5 +86,18 @@ public class OrderSettingServiceImpl implements OrderSettingService {
             System.out.println(orderSetting);;
         }*/
         return orderSettings;
+    }
+
+    @Override
+    public void setNumberByDate(String orderDate, Integer num) {
+        //判断当前日期是否存在
+        int orderSettingByOrderDate = orderSettingDao.getOrderSettingByOrderDate(orderDate);
+        if (orderSettingByOrderDate>0){
+            //修改
+            orderSettingDao.setNumberByDate(orderDate,num);
+        }else {
+            //添加
+            orderSettingDao.addOrderSetting(num,orderDate,0);
+        }
     }
 }

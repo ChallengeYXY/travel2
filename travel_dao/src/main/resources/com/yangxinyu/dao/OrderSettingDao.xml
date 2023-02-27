@@ -22,4 +22,9 @@
     <select id="getOrderSettingByMonth" resultType="com.yangxinyu.entity.OrderSetting" parameterType="map">
         SELECT orderDate,number,reservations FROM t_ordersetting WHERE orderDate BETWEEN #{param1} AND #{param2}
     </select>
+
+    <!--根据日期修改可预约人数-->
+    <update id="setNumberByDate" parameterType="map">
+        UPDATE t_ordersetting SET number=#{param2} WHERE orderDate=#{param1}
+    </update>
 </mapper>

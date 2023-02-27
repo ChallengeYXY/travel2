@@ -1,6 +1,8 @@
 package com.yangxinyu.controller;
 
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.alibaba.dubbo.remoting.TimeoutException;
+import com.alibaba.dubbo.rpc.RpcException;
 import com.yangxinyu.constant.MessageConstant;
 import com.yangxinyu.entity.OrderSetting;
 import com.yangxinyu.entity.Result;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.List;
 
 @RestController
@@ -37,12 +40,35 @@ public class OrderSettingController {
             return new Result(true,MessageConstant.UPLOAD_SUCCESS);
         } catch (IOException e) {
             return new Result(false,MessageConstant.UPLOAD_FAIL);
+        } catch (ParseException e) {
+            return new Result(false,MessageConstant.UPLOAD_FAIL);
         }
     }
 
+    /**
+     * 通过年月获取整个日历预定信息
+     * @param year
+     * @param month
+     * @return
+     */
     @RequestMapping("/getOrderSettingByMonth")
-    private Result getOrderSettingByMonth(Integer year,Integer month){
+    public Result getOrderSettingByMonth(Integer year,Integer month){
         List<OrderSetting> orderSettings = orderSettingService.getOrderSettingByMonth(year,month);
         return new Result(true,MessageConstant.GET_ORDERSETTING_SUCCESS,orderSettings);
+    }
+
+    /**
+     * 设置可预约人数
+     * @param date
+     * @return
+     */
+    @RequestMapping("/setNumber")
+    public Result setNumber(String date,Integer num){
+        try {
+            orderSettingService.setNumberByDate(date,num);
+            return new Result(true ,MessageConstant.ORDERSETTING_SUCCESS);
+        } catch (Exception e) {
+            return new Result(false,MessageConstant.ORDERSETTING_FAIL);
+        }
     }
 }

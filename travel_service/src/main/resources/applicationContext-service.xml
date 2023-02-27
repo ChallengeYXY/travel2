@@ -11,5 +11,5 @@
     <!--dubbo自动扫描-->
     <dubbo:annotation package="com.yangxinyu.service"></dubbo:annotation>
     <!--防止统一服务超时重试-->
-    <dubbo:reference interface="com.yangxinyu.service.TravelItemService" retries="0" timeout="10000"></dubbo:reference>
+    <dubbo:reference interface="com.yangxinyu.service.TravelItemService" retries="3" timeout="20000"></dubbo:reference>
 </beans>
