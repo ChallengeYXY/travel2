@@ -14,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
+import java.util.List;
+
 @Service
 public class SetmealServiceImpl implements SetmealService {
     @Autowired
@@ -73,5 +75,17 @@ public class SetmealServiceImpl implements SetmealService {
 
         //返回分页数据（总条数与当前页内容）
         return new PageResult(page.getTotal(),page.getResult());
+    }
+
+    @Override
+    public List<Setmeal> getAll() {
+        List<Setmeal> setmeals = setmealDao.getAll();
+        return setmeals;
+    }
+
+    @Override
+    public Setmeal getSetmealById(Integer id) {
+        Setmeal setmeal = setmealDao.getSetmealById(id);
+        return setmeal;
     }
 }

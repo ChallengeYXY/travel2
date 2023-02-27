@@ -24,4 +24,29 @@
             </if>
         </where>
     </select>
+
+    <select id="getAll" resultType="com.yangxinyu.entity.Setmeal">
+        SELECT id,`name`,`code`,helpCode,sex,age,price,remark,attention,img
+        FROM t_setmeal
+    </select>
+
+    <select id="getSetmealById" resultType="com.yangxinyu.entity.Setmeal" resultMap="findByIdResultMap" parameterType="int">
+        select * from t_setmeal where id=#{id}
+    </select>
+    <resultMap type="com.yangxinyu.entity.Setmeal" id="findByIdResultMap">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="code" property="code"/>
+        <result column="helpCode" property="helpCode"/>
+        <result column="sex" property="sex"/>
+        <result column="age" property="age"/>
+        <result column="price" property="price"/>
+        <result column="remark" property="remark"/>
+        <result column="attention" property="attention"/>
+        <result column="img" property="img"/>
+        <collection property="travelGroups" column="id" select="com.yangxinyu.dao.TravelGroupDao.getTravelGroupById"></collection>
+    </resultMap>
+
+
+
 </mapper>

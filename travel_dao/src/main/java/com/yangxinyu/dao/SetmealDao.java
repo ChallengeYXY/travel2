@@ -3,6 +3,8 @@ package com.yangxinyu.dao;
 import com.github.pagehelper.Page;
 import com.yangxinyu.entity.Setmeal;
 
+import java.util.List;
+
 public interface SetmealDao {
     /**
      * 向套餐游表添加数据
@@ -24,4 +26,8 @@ public interface SetmealDao {
      * @return
      */
     public Page findPage(String queryString);
+
+    List<Setmeal> getAll();
+
+    Setmeal getSetmealById(Integer id);
 }

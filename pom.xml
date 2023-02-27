@@ -17,6 +17,7 @@
         <module>travel_service</module>
         <module>travel_web</module>
         <module>travel_job</module>
+        <module>travel_mobile_web</module>
     </modules>
 
     <properties>

@@ -25,8 +25,10 @@
                 <configuration>
                     <!--端口控制，不建议和本地Tomcat端口或idea集成的Tomcat端口号一致-->
                     <port>8081</port>
-                    <!--项目路径控制意味着http://localhost:8081/-->
-                    <path>/travel</path>
+                    <!--访问项目映射http://localhost:8081/travel-->
+                    <!--<path>/travel</path>-->
+                    <!--访问项目映射http://localhost:8081/-->
+                    <path>/</path>
                     <!--请求URL编码-->
                     <uriEncoding>UTF-8</uriEncoding>
                 </configuration>

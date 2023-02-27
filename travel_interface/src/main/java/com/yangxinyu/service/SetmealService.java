@@ -4,6 +4,8 @@ import com.yangxinyu.entity.PageResult;
 import com.yangxinyu.entity.QueryPageBean;
 import com.yangxinyu.entity.Setmeal;
 
+import java.util.List;
+
 public interface SetmealService {
     /**
      * 上传套餐游图片
@@ -23,4 +25,17 @@ public interface SetmealService {
      * @return
      */
     public PageResult findPage(QueryPageBean queryPageBean);
+
+    /**
+     * 查询所有套餐
+     * @return
+     */
+    List<Setmeal> getAll();
+
+    /**
+     * 根据套餐id查询套餐详情
+     * @param id
+     * @return
+     */
+    Setmeal getSetmealById(Integer id);
 }
